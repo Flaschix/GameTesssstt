@@ -20,7 +20,15 @@ class PreloadScene extends Phaser.Scene {
         this.load.image('mobileXButton', 'assets/Press.png');
 
         // Загружаем изображения для зон
-
+        this.load.image('overlay1', 'assets/1.png');
+        this.load.image('overlay2', 'assets/2.png');
+        this.load.image('overlay3', 'assets/3.png');
+        this.load.image('overlay4', 'assets/4.png');
+        this.load.image('overlay5', 'assets/5.png');
+        this.load.image('overlay6', 'assets/6.png');
+        this.load.image('overlay7', 'assets/7.png');
+        this.load.image('overlay8', 'assets/8.png');
+        this.load.image('overlay9', 'assets/9.png');
     }
 
     create() {
@@ -37,12 +45,6 @@ class MainScene extends Phaser.Scene {
         this.isDragging = false;
         this.currentZoneIndex = -1;
         this.overlayImages = [];
-    }
-
-    preload() {
-        for (let i = 1; i <= 9; i++) {
-            this.load.image(`overlay${i}`, `assets/${i}.png`);
-        }
     }
 
     create() {
