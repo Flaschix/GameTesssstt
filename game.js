@@ -45,6 +45,7 @@ class MainScene extends Phaser.Scene {
         this.isDragging = false;
         this.currentZoneIndex = -1;
         this.overlayImages = [];
+        this.originalZonePositions = [];
     }
 
     create() {
@@ -67,6 +68,15 @@ class MainScene extends Phaser.Scene {
             this.joystickBase.setPosition(100, this.cameras.main.height - 100);
             this.joystickThumb.setPosition(100, this.cameras.main.height - 100);
         }
+
+        // Пересчитываем координаты зон
+        this.zones.forEach((zone, index) => {
+            let originalPos = this.originalZonePositions[index];
+            let scaleX = this.cameras.main.width / this.map.width;
+            let scaleY = this.cameras.main.height / this.map.height;
+            let scale = Math.max(scaleX, scaleY);
+            zone.setPosition(originalPos.x * scale, originalPos.y * scale);
+        });
     }
 
     createMap() {
@@ -139,7 +149,9 @@ class MainScene extends Phaser.Scene {
             let zone = this.add.zone(pos.x, pos.y, 40, 40).setOrigin(0.5, 0.5);
             zone.zoneIndex = index + 1;
             this.zones.push(zone);
+            this.originalZonePositions.push(pos); // Сохраняем исходные координаты
         });
+
 
         this.physics.world.enable(this.zones);
     }
