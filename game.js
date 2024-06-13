@@ -124,19 +124,19 @@ class MainScene extends Phaser.Scene {
     createZones() {
         this.zones = [];
         const zonePositions = [
-            { x: 200, y: 200 },
-            { x: 400, y: 200 },
-            { x: 600, y: 200 },
-            { x: 200, y: 400 },
-            { x: 400, y: 400 },
-            { x: 600, y: 400 },
-            { x: 200, y: 600 },
-            { x: 400, y: 600 },
-            { x: 600, y: 600 }
+            { x: 656, y: 652 },
+            { x: 50, y: 378 },
+            { x: 280, y: 50 },
+            { x: 560, y: 355 },
+            { x: 805, y: 287 },
+            { x: 994, y: 437 },
+            { x: 946, y: 32 },
+            { x: 1144, y: 346 },
+            { x: 295, y: 341 }
         ];
 
         zonePositions.forEach((pos, index) => {
-            let zone = this.add.zone(pos.x, pos.y, 100, 100).setOrigin(0.5, 0.5);
+            let zone = this.add.zone(pos.x, pos.y, 40, 40).setOrigin(0.5, 0.5);
             zone.zoneIndex = index + 1;
             this.zones.push(zone);
         });
@@ -234,6 +234,10 @@ class MainScene extends Phaser.Scene {
                 this.closeButton.setVisible(this.isOverlayVisible);
             }
         });
+
+        this.input.keyboard.on('keydown-C', () => {
+            console.log(this.player.x + " " + this.player.y)
+        });
     }
 
     update() {
@@ -304,8 +308,8 @@ const config = {
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 1280,
-        height: 720,
+        width: 1260,
+        height: 740,
         parent: 'game-container'
     },
     physics: {
