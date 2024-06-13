@@ -56,6 +56,17 @@ class MainScene extends Phaser.Scene {
         this.createJoystick();
         this.createMobileXButton();
         this.createInputHandlers();
+
+        // Добавляем обработчик события resize
+        window.addEventListener('resize', () => this.resize());
+        this.resize(); // Вызываем resize при создании сцены, чтобы установить правильное положение джойстика
+    }
+
+    resize() {
+        if (this.isMobile()) {
+            this.joystickBase.setPosition(100, this.cameras.main.height - 100);
+            this.joystickThumb.setPosition(100, this.cameras.main.height - 100);
+        }
     }
 
     createMap() {
