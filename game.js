@@ -304,8 +304,9 @@ const config = {
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 1260,
-        height: 740
+        width: 1280,
+        height: 720,
+        parent: 'game-container'
     },
     physics: {
         default: 'arcade',
@@ -317,3 +318,24 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
+
+window.addEventListener('load', () => {
+    resizeGame();
+    window.addEventListener('resize', resizeGame);
+});
+
+function resizeGame() {
+    const canvas = document.querySelector('canvas');
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+    const windowRatio = windowWidth / windowHeight;
+    const gameRatio = game.config.width / game.config.height;
+
+    if (windowRatio < gameRatio) {
+        canvas.style.width = windowWidth + 'px';
+        canvas.style.height = (windowWidth / gameRatio) + 'px';
+    } else {
+        canvas.style.width = (windowHeight * gameRatio) + 'px';
+        canvas.style.height = windowHeight + 'px';
+    }
+}
